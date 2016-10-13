@@ -16,6 +16,20 @@ function Log(opt) {
     function log() {
         console.log.apply(console, arguments);
     }
+
+    let timeRecord = new Map();
+    log.constructor.timeStart = function (name) {
+        timeRecord.set(name, +new Date());
+    };
+
+    log.constructor.timeEnd = function (name) {
+        if(timeRecord.has(name)){
+            log('use time: ' + +new Date() - timeRecord.get(name));
+        }else{
+            log('can not find start time name :' + name);
+        }
+    };
+
     return global.log = log;
 }
 module.exports = Log;
