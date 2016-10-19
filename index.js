@@ -16,6 +16,7 @@ function Log(opt) {
     function log() {
         console.log.apply(console, arguments);
     }
+    log.constructor = console.constructor;
 
     let timeRecord = new Map();
     log.constructor.timeStart = function (name) {
