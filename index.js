@@ -13,23 +13,28 @@ function Log(opt) {
     //    文件 日志
     }
 
-    function log() {
+    function L() {
 
     }
-    log.constructor = console.constructor;
+    L.prototype.info = function () {
+        console.info.apply(console, arguments);
+    };
+
+    L.prototype.error = function () {
+        console.error.apply(console, arguments);
+    };
 
     let timeRecord = new Map();
-    log.constructor.timeStart = function (name) {
+    L.prototype.timeStart = function (name) {
         timeRecord.set(name, +new Date());
     };
-    log.constructor.timeEnd = function (name) {
+    L.prototype.timeEnd = function (name) {
         if(timeRecord.has(name)){
-            log('use time: ' + +new Date() - timeRecord.get(name));
+            this.info('use time: ' + String(+new Date() - timeRecord.get(name)));
         }else{
-            log('can not find start time name :' + name);
+            this.info('can not find start time name :' + name);
         }
     };
-
-    return global.log = new log();
+    return new L();
 }
 module.exports = Log;
