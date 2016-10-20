@@ -16,6 +16,7 @@ function Log(opt) {
     function log() {
 
     }
+    log.constructor = console.constructor;
 
     let timeRecord = new Map();
     log.constructor.timeStart = function (name) {
@@ -28,7 +29,7 @@ function Log(opt) {
             log('can not find start time name :' + name);
         }
     };
-    
+
     return global.log = new log();
 }
 module.exports = Log;
