@@ -35,6 +35,14 @@ function Log(opt) {
             this.info('can not find start time name :' + name);
         }
     };
-    return new L();
+    return global.log = new L();
 }
 module.exports = Log;
+
+//test
+if(require.main !== module) return;
+new Log({});
+log.timeStart('start');
+setTimeout(() => {
+    log.timeEnd('start')
+}, 2000);
