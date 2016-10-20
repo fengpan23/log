@@ -4,7 +4,6 @@
 "use strict";
 
 function Log(options) {
-    options = options || {};
     switch (options.env){
         case 'debug':
             //    文件 和 即时日志
@@ -45,6 +44,7 @@ let singleton, log;
  * @returns {Log}
  */
 module.exports = function(options){
+    options = options || {};
     if(singleton || options.singleton){
         singleton = singleton || options.singleton;
         return log && log.constructor  === Log ? log : new Log(options);
