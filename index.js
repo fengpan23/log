@@ -17,6 +17,11 @@ function Log(options) {
         default:
     }
 }
+
+Log.prototype.debug = function () {
+    console.log.apply(console, arguments);
+};
+
 Log.prototype.info = function () {
     console.info.apply(console, arguments);
 };
